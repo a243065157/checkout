@@ -11,6 +11,7 @@ new Vue({
     },
     data: {
         limitNum:3,
+        currentIndex:0,
         addressList: []
     },
     computed:{
@@ -23,8 +24,23 @@ new Vue({
         getAddressList: function () {
             this.$http.get('data/address.json').then(response => {
                 var res = response.body;
-                this.addressList = res.result;
+                console.log(res.status);
+                if(res.status=="0"){
+                    this.addressList = res.result;
+                }
             });
+        },
+        setDefault:function(addressId){
+            console.log(addressId);
+            this.addressList.forEach(function(adress,index){
+                    if(adress.addressId===addressId){
+                        adress.isDefault=true;
+                    }else{
+                        adress.isDefault=false;
+                    }
+            })
+
+
         }
     }
 })
