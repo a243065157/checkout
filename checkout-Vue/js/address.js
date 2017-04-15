@@ -12,6 +12,7 @@ new Vue({
     data: {
         limitNum:3,
         currentIndex:0,
+        deliveryIndex:0,
         addressList: []
     },
     computed:{
@@ -39,8 +40,11 @@ new Vue({
                         adress.isDefault=false;
                     }
             })
-
-
+        },
+        delAddress:function(addressId){
+            console.log(addressId);
+            var index=this.addressList.indexOf(addressId,1);
+            this.addressList.splice(index,1);
         }
     }
 })
